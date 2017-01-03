@@ -8,7 +8,7 @@ namespace TemplateProject.DataAccess
     /// </summary>
     /// <typeparam name="TEntity">The type of the entity.</typeparam>
     /// <seealso cref="System.IDisposable" />
-    public interface IWriter<in TEntity> where TEntity : Entity
+    public interface IWriter<in TEntity> : IWriter where TEntity : Entity
     {
         /// <summary>
         /// Adds the specified entity.

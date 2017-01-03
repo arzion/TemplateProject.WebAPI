@@ -1,11 +1,11 @@
 ﻿using Autofac;
 using TemplateProject.DataAccess;
-using TemplateProject.DataAccess.EntityFramework;
+using TemplateProject.DataAccess.StaticStorage;
 
 namespace TemplateProject.WebAPI.AutofacModules
 {
     /// <summary>
-    /// Autofac module that register all utils dependencies.
+    /// Autofac module that register all data access dependencies.
     /// </summary>
     public class DataAccessModule : Module
     {
@@ -19,18 +19,28 @@ namespace TemplateProject.WebAPI.AutofacModules
         /// </remarks>
         protected override void Load(ContainerBuilder builder)
         {
+            builder.RegisterModule<DataAccess.AutofacModules.DataAccessModule>();
+
+            //builder
+            //    .RegisterGeneric(typeof(EfWriter<>))
+            //    .As(typeof(IWriter<>));
+
+            //builder
+            //    .RegisterGeneric(typeof(EfReader<>))
+            //    .As(typeof(IReader<>));
+
+            //builder
+            //    .RegisterType<DbContextProvider>()
+            //    .As<IDbContextProvider>()
+            //    .InstancePerRequest();
+
             builder
-                .RegisterGeneric(typeof(EfWriter<>))
+                .RegisterGeneric(typeof(StaticWriter<>))
                 .As(typeof(IWriter<>));
 
             builder
-                .RegisterGeneric(typeof(EfReader<>))
+                .RegisterGeneric(typeof(StaticReader<>))
                 .As(typeof(IReader<>));
-
-            builder
-                .RegisterType<DbContextProvider>()
-                .As<IDbContextProvider>()
-                .InstancePerRequest();
         }
     }
 }

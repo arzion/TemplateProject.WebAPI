@@ -2,6 +2,7 @@
 using System.Web.Http;
 using Autofac;
 using Autofac.Integration.WebApi;
+using TemplateProject.DataAccess;
 using TemplateProject.DomainModel;
 
 namespace TemplateProject.WebAPI.AppStart
@@ -25,6 +26,7 @@ namespace TemplateProject.WebAPI.AppStart
             containerBuilder.RegisterApiControllers(Assembly.GetExecutingAssembly());
             var container = containerBuilder.Build();
 
+            RegisterWriterFactory(container);
             var dependencyResolver = new AutofacWebApiDependencyResolver(container);
             config.DependencyResolver = dependencyResolver;
         }
@@ -33,6 +35,12 @@ namespace TemplateProject.WebAPI.AppStart
         {
             containerBuilder.RegisterAssemblyModules(typeof(Entity).Assembly);
             containerBuilder.RegisterAssemblyModules(Assembly.GetExecutingAssembly());
+        }
+
+        private static void RegisterWriterFactory(IComponentContext container)
+        {
+            Configuration.WriterFactory = type
+                => container.Resolve(typeof(IWriter<>).MakeGenericType(type.GetType())) as IWriter;
         }
     }
 }

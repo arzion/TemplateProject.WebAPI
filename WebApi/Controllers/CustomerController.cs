@@ -15,7 +15,8 @@ namespace TemplateProject.WebAPI.Controllers
     public class CustomerController : ApiController
     {
         private readonly IReader<Customer> _customerReader;
-        private readonly IWriter<Customer> _customerWriter;
+        private readonly ITransactionRunner _transactionRunner;
+
         private readonly ICustomerMapper _customerMapper;
         private readonly ICustomerRequestModelMapper _customerRequestModelMapper;
         private readonly IUrlHelper _urlHelper;
@@ -24,22 +25,22 @@ namespace TemplateProject.WebAPI.Controllers
         /// Initializes a new instance of the <see cref="CustomerController" /> class.
         /// </summary>
         /// <param name="customerReader">The customer reader.</param>
-        /// <param name="customerWriter">The customer writer.</param>
         /// <param name="urlHelper">The URL helper.</param>
         /// <param name="customerMapper">The customer mapper.</param>
         /// <param name="customerRequestModelMapper">The customer request model mapper.</param>
+        /// <param name="transactionRunner">The transaction runner.</param>
         public CustomerController(
             IReader<Customer> customerReader,
-            IWriter<Customer> customerWriter,
             IUrlHelper urlHelper,
             ICustomerMapper customerMapper,
-            ICustomerRequestModelMapper customerRequestModelMapper)
+            ICustomerRequestModelMapper customerRequestModelMapper,
+            ITransactionRunner transactionRunner)
         {
             _customerReader = customerReader;
-            _customerWriter = customerWriter;
             _urlHelper = urlHelper;
             _customerMapper = customerMapper;
             _customerRequestModelMapper = customerRequestModelMapper;
+            _transactionRunner = transactionRunner;
         }
 
         /// <summary>
@@ -93,7 +94,8 @@ namespace TemplateProject.WebAPI.Controllers
         public async Task<IHttpActionResult> Post([FromBody]CustomerRequestModel data)
         {
             var customer = _customerRequestModelMapper.MapToCustomer(data);
-            var id = await _customerWriter.AddAsync(customer);
+            await _transactionRunner.Run(unitOfWork => unitOfWork.MarkAsNew(customer));
+            var id = customer.Id;
 
             return Created(
                 _urlHelper.GetUri<CustomerController>(c => c.Get(id)).AbsoluteUri,
@@ -117,7 +119,7 @@ namespace TemplateProject.WebAPI.Controllers
             }
             _customerRequestModelMapper.MergeToCustomer(data, customer);
 
-            await _customerWriter.UpdateAsync(customer);
+            await _transactionRunner.Run(unitOfWork => unitOfWork.MarkAsUpdated(customer));
 
             var responseModel = _customerMapper.MapToResponseModel(customer);
             return Ok(responseModel);
@@ -138,7 +140,7 @@ namespace TemplateProject.WebAPI.Controllers
                 return NotFound();
             }
 
-            await _customerWriter.DeleteAsync(customer);
+            await _transactionRunner.Run(unitOfWork => unitOfWork.MarkAsDeleted(customer));
 
             return Ok();
         }
