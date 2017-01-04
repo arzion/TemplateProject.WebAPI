@@ -9,7 +9,7 @@ namespace TemplateProject.DataAccess.EntityFramework
     /// The unit of work processor.
     /// </summary>
     /// <seealso cref="TemplateProject.DataAccess.UnitOfWork.IUnitOfWorkProcessor" />
-    public class EfUnitOfWorkProcessor : IUnitOfWorkProcessor
+    public class EfUnitOfWorkProcessor : DefaultUnitOfWorkProcessor
     {
         private readonly DbContext _context;
 
@@ -27,8 +27,9 @@ namespace TemplateProject.DataAccess.EntityFramework
         /// </summary>
         /// <param name="entities"></param>
         /// <returns>The result of processing changes operation.</returns>
-        public async Task Process(IEnumerable<UnitOfWorkEntity> entities)
+        public override async Task Process(IEnumerable<UnitOfWorkEntity> entities)
         {
+            await base.Process(entities);
             await _context.SaveChangesAsync();
         }
     }

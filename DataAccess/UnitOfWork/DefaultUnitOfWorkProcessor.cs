@@ -7,12 +7,12 @@ namespace TemplateProject.DataAccess.UnitOfWork
     /// <summary>
     /// The processor of the Unit of Work entities.
     /// </summary>
-    internal class DefaultUnitOfWorkProcessor : IUnitOfWorkProcessor
+    public class DefaultUnitOfWorkProcessor : IUnitOfWorkProcessor
     {
         /// <summary>
         /// Process the changes of the entities.
         /// </summary>
-        public async Task Process(IEnumerable<UnitOfWorkEntity> entities)
+        public virtual async Task Process(IEnumerable<UnitOfWorkEntity> entities)
         {
             var entitiesToProcess = entities.ToList();
             foreach (var addedEntities in entitiesToProcess.Where(it => it.State == UnitOfWorkState.New))
