@@ -153,7 +153,9 @@
     <Compile Include="AppStart\DependencyResolverConfiguration.cs" />
     <Compile Include="AppStart\FormatterConfiguration.cs" />
     <Compile Include="AppStart\RouteConfiguration.cs" />
-    <Compile Include="AutofacModules\DataAccessModule.cs" />
+    <Compile Include="AutofacModules\StaticDataAccessModule.cs" />
+    <Compile Include="AutofacModules\EfDataAccessModule.cs" />
+    <Compile Include="AutofacModules\EfImmidiateDataAccessModule.cs" />
     <Compile Include="AutofacModules\ModelsModule.cs" />
     <Compile Include="AutofacModules\UtilsModule.cs" />
     <Compile Include="Controllers\CustomerController.cs" />

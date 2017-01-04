@@ -30,7 +30,7 @@ namespace TemplateProject.DataAccess.UnitOfWork
             foreach (var deletedEntities in entitiesToProcess.Where(it => it.State == UnitOfWorkState.Deleted))
             {
                 var writer = Configuration.WriterFactory(deletedEntities.Entity);
-                await ((dynamic)writer).UpdateAsync((dynamic)deletedEntities.Entity);
+                await ((dynamic)writer).DeleteAsync((dynamic)deletedEntities.Entity);
             }
         }
     }

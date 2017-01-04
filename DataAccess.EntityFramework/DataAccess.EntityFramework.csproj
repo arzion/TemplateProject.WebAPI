@@ -50,12 +50,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EfUnitOfWorkProcessor.cs" />
+    <Compile Include="EfWriter%271.cs" />
     <Compile Include="EfReader%271.cs" />
     <Compile Include="DbContextProvider.cs" />
     <Compile Include="IDbContextProvider.cs" />
     <Compile Include="QuoteMyCadDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="EfWriter%271.cs" />
+    <Compile Include="EfImmidiateWriter%271.cs" />
     <Compile Include="TypeConfigurations\CustomerTypeConfiguration.cs" />
     <Compile Include="ValidateDatabaseInitializer%271.cs" />
   </ItemGroup>

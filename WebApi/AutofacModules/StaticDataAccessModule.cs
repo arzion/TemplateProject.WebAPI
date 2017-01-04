@@ -7,7 +7,7 @@ namespace TemplateProject.WebAPI.AutofacModules
     /// <summary>
     /// Autofac module that register all data access dependencies.
     /// </summary>
-    public class DataAccessModule : Module
+    public class StaticDataAccessModule : Module
     {
         /// <summary>
         /// Override to add registrations to the container.
@@ -20,19 +20,6 @@ namespace TemplateProject.WebAPI.AutofacModules
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterModule<DataAccess.AutofacModules.DataAccessModule>();
-
-            //builder
-            //    .RegisterGeneric(typeof(EfWriter<>))
-            //    .As(typeof(IWriter<>));
-
-            //builder
-            //    .RegisterGeneric(typeof(EfReader<>))
-            //    .As(typeof(IReader<>));
-
-            //builder
-            //    .RegisterType<DbContextProvider>()
-            //    .As<IDbContextProvider>()
-            //    .InstancePerRequest();
 
             builder
                 .RegisterGeneric(typeof(StaticWriter<>))

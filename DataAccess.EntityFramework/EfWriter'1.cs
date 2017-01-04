@@ -27,54 +27,31 @@ namespace TemplateProject.DataAccess.EntityFramework
         /// Adds the specified entity.
         /// </summary>
         /// <param name="entity">The entity.</param>
-        public virtual async Task<int> AddAsync(TEntity entity)
+        public virtual Task<int> AddAsync(TEntity entity)
         {
-            MarkAllUnchanged();
             Entities.Add(entity);
-
-            var entry = _context.Entry(entity);
-            entry.State = EntityState.Added;
-
-            await _context.SaveChangesAsync();
-
-            return entity.Id;
+            return Task.FromResult(entity.Id);
         }
 
         /// <summary>
         /// Deletes the specified entity.
         /// </summary>
         /// <param name="entity">The entity.</param>
-        public virtual async Task DeleteAsync(TEntity entity)
+        public virtual Task DeleteAsync(TEntity entity)
         {
-            MarkAllUnchanged();
-            var entry = _context.Entry(entity);
-            entry.State = EntityState.Deleted;
-
             Entities.Remove(entity);
-
-            await _context.SaveChangesAsync();
+            return Task.CompletedTask;
         }
 
         /// <summary>
         /// Updates the specified entity.
         /// </summary>
         /// <param name="entity">The entity.</param>
-        public virtual async Task UpdateAsync(TEntity entity)
+        public virtual Task UpdateAsync(TEntity entity)
         {
-            MarkAllUnchanged();
             var entry = _context.Entry(entity);
             entry.State = EntityState.Modified;
-
-            await _context.SaveChangesAsync();
-        }
-
-        private void MarkAllUnchanged()
-        {
-            var changedEntries = _context.ChangeTracker.Entries();
-            foreach (var dbEntityEntry in changedEntries)
-            {
-                dbEntityEntry.State = EntityState.Unchanged;
-            }
+            return Task.CompletedTask;
         }
     }
 }
