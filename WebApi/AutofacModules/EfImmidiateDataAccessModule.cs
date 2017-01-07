@@ -31,8 +31,7 @@ namespace TemplateProject.WebAPI.AutofacModules
 
             builder
                 .RegisterType<DbContextProvider>()
-                .As<IDbContextProvider>()
-                .InstancePerRequest();
+                .As<IDbContextProvider>();
         }
     }
 }

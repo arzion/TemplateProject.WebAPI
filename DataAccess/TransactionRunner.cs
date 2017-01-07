@@ -17,7 +17,7 @@ namespace TemplateProject.DataAccess
         /// </summary>
         public TransactionRunner()
         {
-            var unitOfWork = new UnitOfWork.UnitOfWork(Configuration.UnitOfWorkProcessor());
+            var unitOfWork = new UnitOfWork.UnitOfWork(Configuration.UnitOfWorkProcessorFactory());
             _unitOfWork = unitOfWork;
             _unitOfWorkManager = unitOfWork;
         }

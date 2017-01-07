@@ -15,7 +15,7 @@ namespace TemplateProject.DataAccess
         /// <value>
         /// The unit of work processor.
         /// </value>
-        public static Func<IUnitOfWorkProcessor> UnitOfWorkProcessor { get; set; } = () => new DefaultUnitOfWorkProcessor();
+        public static Func<IUnitOfWorkProcessor> UnitOfWorkProcessorFactory { get; set; } = () => new DefaultUnitOfWorkProcessor();
 
         /// <summary>
         /// Provides the writer factory.

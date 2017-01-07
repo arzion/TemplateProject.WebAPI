@@ -1,8 +1,10 @@
 ﻿using System.Reflection;
 using System.Web.Http;
+using System.Web.Http.Dependencies;
 using Autofac;
 using Autofac.Integration.WebApi;
 using TemplateProject.DataAccess;
+using TemplateProject.DataAccess.UnitOfWork;
 using TemplateProject.DomainModel;
 using TemplateProject.WebAPI.AutofacModules;
 
@@ -27,9 +29,9 @@ namespace TemplateProject.WebAPI.AppStart
             containerBuilder.RegisterApiControllers(Assembly.GetExecutingAssembly());
             var container = containerBuilder.Build();
 
-            ConfigureDataAccess(container);
-
             var dependencyResolver = new AutofacWebApiDependencyResolver(container);
+            ConfigureDataAccess(dependencyResolver);
+
             config.DependencyResolver = dependencyResolver;
         }
 
@@ -37,18 +39,19 @@ namespace TemplateProject.WebAPI.AppStart
         {
             containerBuilder.RegisterAssemblyModules(typeof(Entity).Assembly);
 
-            containerBuilder.RegisterModule<StaticDataAccessModule>();
+            containerBuilder.RegisterModule<EfDataAccessModule>();
             containerBuilder.RegisterModule<ModelsModule>();
             containerBuilder.RegisterModule<UtilsModule>();
         }
 
-        private static void ConfigureDataAccess(IComponentContext container)
+        private static void ConfigureDataAccess(IDependencyResolver resolver)
         {
-            Configuration.WriterFactory = type
-                => container.Resolve(typeof(IWriter<>).MakeGenericType(type.GetType())) as IWriter;
+            Configuration.WriterFactory =
+                type => resolver.GetService(typeof(IWriter<>).MakeGenericType(type.GetType())) as IWriter;
 
             // Use in case of EfDataAccessModule registration
-            // Configuration.UnitOfWorkProcessor = container.Resolve<IUnitOfWorkProcessor>;
+            Configuration.UnitOfWorkProcessorFactory =
+                () => resolver.GetService(typeof(IUnitOfWorkProcessor)) as IUnitOfWorkProcessor;
         }
     }
 }
