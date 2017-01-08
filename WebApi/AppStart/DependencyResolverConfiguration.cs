@@ -59,6 +59,8 @@ namespace TemplateProject.WebAPI.AppStart
             var container = containerBuilder.Build();
 
             ConfigureDataAccess(container);
+
+            config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
         }
 
         private static void ConfigureCastleWindsorDependencyResolver(HttpConfiguration config)
