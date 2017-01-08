@@ -12,9 +12,9 @@ namespace TemplateProject.WebAPI.AutofacModules
     /// </summary>
     public class DataAccessModule : Module
     {
-        private const string EfTransactions = "efTransactions";
-        private const string EfImmidiate = "efImmidiate";
-        private const string Static = "static";
+        public const string EfTransactions = "efTransactions";
+        public const string EfImmidiate = "efImmidiate";
+        public const string Static = "static";
 
         /// <summary>
         /// Override to add registrations to the container.

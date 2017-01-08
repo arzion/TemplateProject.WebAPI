@@ -1,11 +1,20 @@
-﻿using System.Reflection;
+﻿using System.Configuration;
+using System.Reflection;
 using System.Web.Http;
-using System.Web.Http.Dependencies;
+using System.Web.Http.Dispatcher;
 using Autofac;
 using Autofac.Integration.WebApi;
+using Castle.MicroKernel;
+using Castle.MicroKernel.Registration;
+using Castle.Windsor;
+using Castle.Windsor.Installer;
+using Castle.Windsor.Proxy;
 using TemplateProject.DataAccess;
 using TemplateProject.DataAccess.UnitOfWork;
+using TemplateProject.WebAPI.AutofacModules;
 using TemplateProject.WebAPI.Controllers;
+using TemplateProject.WebAPI.Utils;
+using Configuration = TemplateProject.DataAccess.Configuration;
 
 namespace TemplateProject.WebAPI.AppStart
 {
@@ -20,13 +29,27 @@ namespace TemplateProject.WebAPI.AppStart
         /// <param name="config">The configuration.</param>
         public static void RegisterResolver(HttpConfiguration config)
         {
-            var dependencyResolver = ConfigureAutofacDependencyResolver(config);
-            ConfigureDataAccess(dependencyResolver);
-
-            config.DependencyResolver = dependencyResolver;
+            var ioc = ConfigurationManager.AppSettings["iocContainer"];
+            switch (ioc)
+            {
+                case "castle":
+                {
+                    ConfigureCastleWindsorDependencyResolver(config);
+                    break;
+                }
+                case "autofac":
+                {
+                    ConfigureAutofacDependencyResolver(config);
+                    break;
+                }
+                default:
+                {
+                    throw new ConfigurationErrorsException("iocContainer setting is incorrect");
+                }
+            }
         }
 
-        private static IDependencyResolver ConfigureAutofacDependencyResolver(HttpConfiguration config)
+        private static void ConfigureAutofacDependencyResolver(HttpConfiguration config)
         {
             var containerBuilder = new ContainerBuilder();
             containerBuilder.RegisterAssemblyModules(typeof(HomeController).Assembly);
@@ -35,17 +58,56 @@ namespace TemplateProject.WebAPI.AppStart
             containerBuilder.RegisterApiControllers(Assembly.GetExecutingAssembly());
             var container = containerBuilder.Build();
 
-            return new AutofacWebApiDependencyResolver(container);
+            ConfigureDataAccess(container);
         }
 
-        private static void ConfigureDataAccess(IDependencyResolver resolver)
+        private static void ConfigureCastleWindsorDependencyResolver(HttpConfiguration config)
+        {
+            var container =
+                new WindsorContainer(
+                    new DefaultKernel(
+                        new InlineDependenciesPropagatingDependencyResolver(),
+                        new DefaultProxyFactory()),
+                    new DefaultComponentInstaller());
+
+            container.Install(FromAssembly.This());
+
+            container.Register(
+                Classes
+                    .FromThisAssembly()
+                    .BasedOn<ApiController>()
+                    .Configure(c => c.PropertiesIgnore(it => true))
+                    .LifestylePerWebRequest());
+
+            config.Services.Replace(
+                typeof(IHttpControllerActivator),
+                new WindsorCompositionRoot(container));
+
+            ConfigureDataAccess(container);
+        }
+
+        private static void ConfigureDataAccess(IContainer container)
         {
             Configuration.WriterFactory =
-                type => resolver.GetService(typeof(IWriter<>).MakeGenericType(type.GetType())) as IWriter;
+                type => container.Resolve(typeof(IWriter<>).MakeGenericType(type.GetType())) as IWriter;
 
-            // Use in case of EfDataAccessModule registration
-            Configuration.UnitOfWorkProcessorFactory =
-                () => resolver.GetService(typeof(IUnitOfWorkProcessor)) as IUnitOfWorkProcessor;
+            if (ConfigurationManager.AppSettings["dataAccessStrategy"] == DataAccessModule.EfTransactions)
+            {
+                Configuration.UnitOfWorkProcessorFactory =
+                    () => container.Resolve(typeof(IUnitOfWorkProcessor)) as IUnitOfWorkProcessor;
+            }
+        }
+
+        private static void ConfigureDataAccess(IWindsorContainer container)
+        {
+            Configuration.WriterFactory =
+                type => container.Resolve(typeof(IWriter<>).MakeGenericType(type.GetType())) as IWriter;
+
+            if (ConfigurationManager.AppSettings["dataAccessStrategy"] == DataAccessModule.EfTransactions)
+            {
+                Configuration.UnitOfWorkProcessorFactory =
+                    () => container.Resolve(typeof(IUnitOfWorkProcessor)) as IUnitOfWorkProcessor;
+            }
         }
     }
 }

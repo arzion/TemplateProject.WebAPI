@@ -24,7 +24,8 @@ namespace TemplateProject.WebAPI.AutofacModules
 
             builder.RegisterAssemblyTypes(assemblyType.Assembly)
                 .Where(t => t.Name.EndsWith("Factory")
-                    && t.Namespace != null && t.Namespace.Contains(".Factories"))
+                    && t.Namespace != null
+                    && t.Namespace.Contains(".Factories"))
                 .AsImplementedInterfaces();
         }
     }
