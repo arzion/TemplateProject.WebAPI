@@ -1,13 +1,14 @@
 ﻿using Autofac;
-using TemplateProject.DataAccess;
-using TemplateProject.DataAccess.StaticStorage;
+using System.Reflection;
+using TemplateProject.DomainModel;
+using Module = Autofac.Module;
 
 namespace TemplateProject.WebAPI.AutofacModules
 {
     /// <summary>
-    /// Autofac module that register all data access dependencies.
+    /// Autofac module that register all domain module services dependencies.
     /// </summary>
-    public class StaticDataAccessModule : Module
+    public class DomainModelModule : Module
     {
         /// <summary>
         /// Override to add registrations to the container.
@@ -19,15 +20,12 @@ namespace TemplateProject.WebAPI.AutofacModules
         /// </remarks>
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterModule<DataAccess.AutofacModules.DataAccessModule>();
+            var assemblyType = typeof(Entity).GetTypeInfo();
 
-            builder
-                .RegisterGeneric(typeof(StaticWriter<>))
-                .As(typeof(IWriter<>));
-
-            builder
-                .RegisterGeneric(typeof(StaticReader<>))
-                .As(typeof(IReader<>));
+            builder.RegisterAssemblyTypes(assemblyType.Assembly)
+                .Where(t => t.Name.EndsWith("Factory")
+                    && t.Namespace != null && t.Namespace.Contains(".Factories"))
+                .AsImplementedInterfaces();
         }
     }
 }

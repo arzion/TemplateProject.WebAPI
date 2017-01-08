@@ -5,8 +5,7 @@ using Autofac;
 using Autofac.Integration.WebApi;
 using TemplateProject.DataAccess;
 using TemplateProject.DataAccess.UnitOfWork;
-using TemplateProject.DomainModel;
-using TemplateProject.WebAPI.AutofacModules;
+using TemplateProject.WebAPI.Controllers;
 
 namespace TemplateProject.WebAPI.AppStart
 {
@@ -21,27 +20,22 @@ namespace TemplateProject.WebAPI.AppStart
         /// <param name="config">The configuration.</param>
         public static void RegisterResolver(HttpConfiguration config)
         {
-            var containerBuilder = new ContainerBuilder();
-
-            BootstrapModules(containerBuilder);
-
-            containerBuilder.RegisterHttpRequestMessage(config);
-            containerBuilder.RegisterApiControllers(Assembly.GetExecutingAssembly());
-            var container = containerBuilder.Build();
-
-            var dependencyResolver = new AutofacWebApiDependencyResolver(container);
+            var dependencyResolver = ConfigureAutofacDependencyResolver(config);
             ConfigureDataAccess(dependencyResolver);
 
             config.DependencyResolver = dependencyResolver;
         }
 
-        private static void BootstrapModules(ContainerBuilder containerBuilder)
+        private static IDependencyResolver ConfigureAutofacDependencyResolver(HttpConfiguration config)
         {
-            containerBuilder.RegisterAssemblyModules(typeof(Entity).Assembly);
+            var containerBuilder = new ContainerBuilder();
+            containerBuilder.RegisterAssemblyModules(typeof(HomeController).Assembly);
 
-            containerBuilder.RegisterModule<EfDataAccessModule>();
-            containerBuilder.RegisterModule<ModelsModule>();
-            containerBuilder.RegisterModule<UtilsModule>();
+            containerBuilder.RegisterHttpRequestMessage(config);
+            containerBuilder.RegisterApiControllers(Assembly.GetExecutingAssembly());
+            var container = containerBuilder.Build();
+
+            return new AutofacWebApiDependencyResolver(container);
         }
 
         private static void ConfigureDataAccess(IDependencyResolver resolver)

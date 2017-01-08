@@ -7,7 +7,7 @@ namespace TemplateProject.DataAccess
     /// <summary>
     /// The runner of application transactions.
     /// </summary>
-    internal class TransactionRunner : ITransactionRunner
+    public class TransactionRunner : ITransactionRunner
     {
         private readonly IUnitOfWorkManager _unitOfWorkManager;
         private readonly IUnitOfWork _unitOfWork;
