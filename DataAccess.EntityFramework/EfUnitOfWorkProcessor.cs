@@ -14,10 +14,14 @@ namespace TemplateProject.DataAccess.EntityFramework
         private readonly DbContext _context;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="EfUnitOfWorkProcessor"/> class.
+        /// Initializes a new instance of the <see cref="EfUnitOfWorkProcessor" /> class.
         /// </summary>
-        /// <param name="provider">The factory of <see cref="DbContext"/>.</param>
-        public EfUnitOfWorkProcessor(IDbContextProvider provider)
+        /// <param name="provider">The factory of <see cref="DbContext" />.</param>
+        /// <param name="writerFactory">The writer factory.</param>
+        public EfUnitOfWorkProcessor(
+            IDbContextProvider provider,
+            IWriterFactory writerFactory)
+             : base(writerFactory)
         {
             _context = provider.GetDbContext();
         }

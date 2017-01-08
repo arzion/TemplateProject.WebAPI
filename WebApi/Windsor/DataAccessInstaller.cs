@@ -29,13 +29,30 @@ namespace TemplateProject.WebAPI.Windsor
         /// </remarks>
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
+            var strategy = ConfigurationManager.AppSettings["dataAccessStrategy"];
+
             container
                 .Register(Component
                     .For<ITransactionRunner>()
                     .ImplementedBy<TransactionRunner>()
                     .LifestyleTransient());
 
-            var strategy = ConfigurationManager.AppSettings["dataAccessStrategy"];
+            if (strategy != EfTransactions)
+            {
+                container
+                    .Register(Component
+                        .For<IUnitOfWorkProcessor>()
+                        .ImplementedBy<DefaultUnitOfWorkProcessor>()
+                        .LifestyleTransient());
+            }
+
+            container
+                .Register(Component
+                    .For<IWriterFactory>()
+                    .UsingFactoryMethod((kernel, context) => new WindsorWriterFactory(kernel))
+                    .LifestyleTransient());
+
+           
             switch (strategy)
             {
                 case EfTransactions:

@@ -5,7 +5,7 @@ using TemplateProject.DataAccess.EntityFramework;
 using TemplateProject.DataAccess.StaticStorage;
 using TemplateProject.DataAccess.UnitOfWork;
 
-namespace TemplateProject.WebAPI.AutofacModules
+namespace TemplateProject.WebAPI.Autofac
 {
     /// <summary>
     /// Autofac module that register all data access dependencies.
@@ -29,6 +29,14 @@ namespace TemplateProject.WebAPI.AutofacModules
             builder
                 .RegisterType<TransactionRunner>()
                 .As<ITransactionRunner>();
+
+            builder
+                .RegisterType<DefaultUnitOfWorkProcessor>()
+                .As<IUnitOfWorkProcessor>();
+
+            builder
+                .RegisterType<AutofacWriterFactory>()
+                .As<IWriterFactory>();
 
             var strategy = ConfigurationManager.AppSettings["dataAccessStrategy"];
             switch (strategy)

@@ -36,8 +36,8 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration.cs" />
     <Compile Include="IReader%271.cs" />
+    <Compile Include="IWriterFactory.cs" />
     <Compile Include="UnitOfWork\DefaultUnitOfWorkProcessor.cs" />
     <Compile Include="UnitOfWork\IUnitOfWorkProcessor.cs" />
     <Compile Include="IWriter.cs" />

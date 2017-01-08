@@ -9,12 +9,8 @@ using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
 using Castle.Windsor.Proxy;
-using TemplateProject.DataAccess;
-using TemplateProject.DataAccess.UnitOfWork;
-using TemplateProject.WebAPI.AutofacModules;
 using TemplateProject.WebAPI.Controllers;
 using TemplateProject.WebAPI.Utils;
-using Configuration = TemplateProject.DataAccess.Configuration;
 
 namespace TemplateProject.WebAPI.AppStart
 {
@@ -58,8 +54,6 @@ namespace TemplateProject.WebAPI.AppStart
             containerBuilder.RegisterApiControllers(Assembly.GetExecutingAssembly());
             var container = containerBuilder.Build();
 
-            ConfigureDataAccess(container);
-
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
         }
 
@@ -84,32 +78,6 @@ namespace TemplateProject.WebAPI.AppStart
             config.Services.Replace(
                 typeof(IHttpControllerActivator),
                 new WindsorCompositionRoot(container));
-
-            ConfigureDataAccess(container);
-        }
-
-        private static void ConfigureDataAccess(IContainer container)
-        {
-            Configuration.WriterFactory =
-                type => container.Resolve(typeof(IWriter<>).MakeGenericType(type.GetType())) as IWriter;
-
-            if (ConfigurationManager.AppSettings["dataAccessStrategy"] == DataAccessModule.EfTransactions)
-            {
-                Configuration.UnitOfWorkProcessorFactory =
-                    () => container.Resolve(typeof(IUnitOfWorkProcessor)) as IUnitOfWorkProcessor;
-            }
-        }
-
-        private static void ConfigureDataAccess(IWindsorContainer container)
-        {
-            Configuration.WriterFactory =
-                type => container.Resolve(typeof(IWriter<>).MakeGenericType(type.GetType())) as IWriter;
-
-            if (ConfigurationManager.AppSettings["dataAccessStrategy"] == DataAccessModule.EfTransactions)
-            {
-                Configuration.UnitOfWorkProcessorFactory =
-                    () => container.Resolve(typeof(IUnitOfWorkProcessor)) as IUnitOfWorkProcessor;
-            }
         }
     }
 }

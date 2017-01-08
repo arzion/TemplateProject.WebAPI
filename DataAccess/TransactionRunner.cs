@@ -15,9 +15,9 @@ namespace TemplateProject.DataAccess
         /// <summary>
         /// Initializes a new instance of the <see cref="TransactionRunner"/> class.
         /// </summary>
-        public TransactionRunner()
+        public TransactionRunner(IUnitOfWorkProcessor unitOfWorkProcessor)
         {
-            var unitOfWork = new UnitOfWork.UnitOfWork(Configuration.UnitOfWorkProcessorFactory());
+            var unitOfWork = new UnitOfWork.UnitOfWork(unitOfWorkProcessor);
             _unitOfWork = unitOfWork;
             _unitOfWorkManager = unitOfWork;
         }

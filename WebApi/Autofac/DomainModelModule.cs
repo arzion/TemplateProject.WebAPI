@@ -1,9 +1,9 @@
-﻿using Autofac;
-using System.Reflection;
+﻿using System.Reflection;
+using Autofac;
 using TemplateProject.DomainModel;
 using Module = Autofac.Module;
 
-namespace TemplateProject.WebAPI.AutofacModules
+namespace TemplateProject.WebAPI.Autofac
 {
     /// <summary>
     /// Autofac module that register all domain module services dependencies.

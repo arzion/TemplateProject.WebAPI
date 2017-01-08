@@ -4,7 +4,7 @@ using Ploeh.Hyprlinkr;
 using TemplateProject.WebAPI.Infrastracture.Routes;
 using TemplateProject.WebAPI.Utils;
 
-namespace TemplateProject.WebAPI.AutofacModules
+namespace TemplateProject.WebAPI.Autofac
 {
     /// <summary>
     /// Autofac module that register all utils dependencies.
