@@ -52,7 +52,6 @@ namespace TemplateProject.WebAPI.Windsor
                     .UsingFactoryMethod((kernel, context) => new WindsorWriterFactory(kernel))
                     .LifestyleTransient());
 
-           
             switch (strategy)
             {
                 case EfTransactions:
