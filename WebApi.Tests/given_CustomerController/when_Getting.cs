@@ -9,10 +9,23 @@ using Ploeh.AutoFixture;
 namespace TemplateProject.Tests.Acceptence.WebApi.given_CustomerController
 {
     // ReSharper disable once InconsistentNaming
-    class when_PostingData
+    class when_GettingData
     {
         [Test]
-        public async Task then_CustomerCreatedWithCorrectAttributes()
+        public async Task then_NotFound_if_IdInvalid()
+        {
+            // arrange
+            const int invalidId = 100500;
+
+            var getResponse = await new HttpRequestBuilder()
+                .GetAsync($"/customer/{invalidId}");
+
+            // assert
+            getResponse.StatusCode.Should().Be(HttpStatusCode.NotFound);
+        }
+
+        [Test]
+        public async Task then_CustomerReturnedWithCorrectAttributes()
         {
             // arrange
             var fixture = new TestAutoFixture();

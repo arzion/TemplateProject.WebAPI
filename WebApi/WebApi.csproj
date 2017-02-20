@@ -168,6 +168,7 @@
     <Compile Include="AppStart\RouteConfiguration.cs" />
     <Compile Include="Autofac\AutofacWriterFactory.cs" />
     <Compile Include="Bootstrap.cs" />
+    <Compile Include="Models\RequestModels\CustomerUpdateRequestModel.cs" />
     <Compile Include="Utils\InlineDependenciesPropagatingDependencyResolver.cs" />
     <Compile Include="Windsor\WindsorWriterFactory.cs" />
     <Compile Include="Windsor\WindsorControllerActivator.cs" />

@@ -50,15 +50,15 @@ namespace TemplateProject.Tests.Acceptence.WebApi.Infrastructure
 
         public async Task<HttpResponseMessage> PostAsync(string url)
         {
-            _requestMessage.RequestUri = new Uri("http://localhost:8888/" + RemoveFirstDash(url));
+            _requestMessage.RequestUri = BuildUri(url);
             _requestMessage.Method = HttpMethod.Post;
 
             return await _httpClient.SendAsync(_requestMessage);
         }
-        
+
         public async Task<HttpResponseMessage> PutAsync(string url)
         {
-            _requestMessage.RequestUri = new Uri("http://localhost:8888/" + RemoveFirstDash(url));
+            _requestMessage.RequestUri = BuildUri(url);
             _requestMessage.Method = HttpMethod.Put;
 
             return await _httpClient.SendAsync(_requestMessage);
@@ -66,7 +66,7 @@ namespace TemplateProject.Tests.Acceptence.WebApi.Infrastructure
 
         public async Task<HttpResponseMessage> DeleteAsync(string url)
         {
-            _requestMessage.RequestUri = new Uri("http://localhost:8888/" + RemoveFirstDash(url));
+            _requestMessage.RequestUri = BuildUri(url);
             _requestMessage.Method = HttpMethod.Delete;
 
             return await _httpClient.SendAsync(_requestMessage);
@@ -74,7 +74,7 @@ namespace TemplateProject.Tests.Acceptence.WebApi.Infrastructure
 
         public async Task<HttpResponseMessage> GetAsync(string url)
         {
-            _requestMessage.RequestUri = new Uri(url.Contains("http://") ? url : "http://localhost:8888/" + RemoveFirstDash(url));
+            _requestMessage.RequestUri = BuildUri(url);
             _requestMessage.Method = HttpMethod.Get;
 
             var response = await _httpClient.SendAsync(_requestMessage);
@@ -92,6 +92,11 @@ namespace TemplateProject.Tests.Acceptence.WebApi.Infrastructure
             }
 
             return response;
+        }
+
+        private static Uri BuildUri(string url)
+        {
+            return new Uri(url.Contains("http://") ? url : "http://localhost:8888/" + RemoveFirstDash(url));
         }
 
         private static string RemoveFirstDash(string value)

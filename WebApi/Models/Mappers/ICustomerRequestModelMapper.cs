@@ -17,6 +17,6 @@ namespace TemplateProject.WebApi.Models.Mappers
         /// </summary>
         /// <param name="data">The data.</param>
         /// <param name="customer">The customer.</param>
-        void MergeToCustomer(CustomerCreateRequestModel data, Customer customer);
+        void MergeToCustomer(CustomerUpdateRequestModel data, Customer customer);
     }
 }

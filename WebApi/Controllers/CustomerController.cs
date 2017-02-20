@@ -110,7 +110,7 @@ namespace TemplateProject.WebApi.Controllers
         /// <returns>
         /// Updated customer.
         /// </returns>
-        public async Task<IHttpActionResult> Put(int id, [FromBody]CustomerCreateRequestModel data)
+        public async Task<IHttpActionResult> Put(int id, [FromBody]CustomerUpdateRequestModel data)
         {
             var customer = await _customerReader.FindAsync(id);
             if (customer == null)
@@ -121,8 +121,7 @@ namespace TemplateProject.WebApi.Controllers
 
             await _transactionRunner.Run(unitOfWork => unitOfWork.MarkAsUpdated(customer));
 
-            var responseModel = _customerMapper.MapToResponseModel(customer);
-            return Ok(responseModel);
+            return Ok();
         }
 
         /// <summary>
