@@ -91,7 +91,7 @@ namespace TemplateProject.WebApi.Controllers
         /// <returns>
         /// Created customer identifier.
         /// </returns>
-        public async Task<IHttpActionResult> Post([FromBody]CustomerCreateModel data)
+        public async Task<IHttpActionResult> Post([FromBody]CustomerCreateRequestModel data)
         {
             var customer = _customerRequestModelMapper.MapToCustomer(data);
             await _transactionRunner.Run(unitOfWork => unitOfWork.MarkAsNew(customer));
@@ -110,7 +110,7 @@ namespace TemplateProject.WebApi.Controllers
         /// <returns>
         /// Updated customer.
         /// </returns>
-        public async Task<IHttpActionResult> Put(int id, [FromBody]CustomerCreateModel data)
+        public async Task<IHttpActionResult> Put(int id, [FromBody]CustomerCreateRequestModel data)
         {
             var customer = await _customerReader.FindAsync(id);
             if (customer == null)

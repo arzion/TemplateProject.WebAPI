@@ -160,11 +160,11 @@
   <ItemGroup>
     <Compile Include="AppStart\DependencyResolverConfiguration.cs" />
     <Compile Include="AppStart\FormatterConfiguration.cs" />
-    <Compile Include="AppStart\Formatters\CustomJsonMediaTypeFormatter.cs" />
-    <Compile Include="AppStart\Formatters\TypedJsonMediaTypeFormatter.cs" />
-    <Compile Include="AppStart\Formatters\XmlMediaTypeFormatter.cs" />
-    <Compile Include="AppStart\MediaTypeAttribute.cs" />
-    <Compile Include="AppStart\MediaTypeFormattersProvider.cs" />
+    <Compile Include="Infrastracture\Formatters\CustomJsonMediaTypeFormatter.cs" />
+    <Compile Include="Infrastracture\Formatters\TypedJsonMediaTypeFormatter.cs" />
+    <Compile Include="Infrastracture\Formatters\XmlMediaTypeFormatter.cs" />
+    <Compile Include="Infrastracture\Formatters\MediaTypeAttribute.cs" />
+    <Compile Include="Infrastracture\Formatters\MediaTypeFormattersProvider.cs" />
     <Compile Include="AppStart\RouteConfiguration.cs" />
     <Compile Include="Autofac\AutofacWriterFactory.cs" />
     <Compile Include="Bootstrap.cs" />
@@ -191,7 +191,7 @@
     <Compile Include="Models\LinksFactories\Impl\CustomerLinksFactory.cs" />
     <Compile Include="Models\Mappers\ICustomerRequestModelMapper.cs" />
     <Compile Include="Models\Mappers\Impl\CustomerRequestModelMapper.cs" />
-    <Compile Include="Models\RequestModels\CustomerCreateModel.cs" />
+    <Compile Include="Models\RequestModels\CustomerCreateRequestModel.cs" />
     <Compile Include="Models\ResponseModels\CustomerResponseModel.cs" />
     <Compile Include="Models\ResponseModels\HomeResponseModel.cs" />
     <Compile Include="Models\ResponseModels\LinkModel.cs" />
@@ -224,7 +224,9 @@
       <Name>DomainModel</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="AppStart\Formatters\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

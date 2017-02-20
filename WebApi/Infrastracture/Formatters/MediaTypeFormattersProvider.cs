@@ -4,14 +4,11 @@ using System.Linq;
 using System.Net.Http.Formatting;
 using System.Net.Http.Headers;
 using System.Reflection;
-using System.Web.Http;
-using TemplateProject.WebAPI.AppStart.Formatters;
-using XmlMediaTypeFormatter = TemplateProject.WebAPI.AppStart.Formatters.XmlMediaTypeFormatter;
 
-namespace TemplateProject.WebAPI.AppStart
+namespace TemplateProject.WebAPI.Infrastracture.Formatters
 {
     /// <summary>
-    /// Provider of supported media types of User API.
+    /// Provider of supported media types of the application.
     /// </summary>
     public static class MediaTypeFormattersProvider
     {
@@ -19,26 +16,15 @@ namespace TemplateProject.WebAPI.AppStart
         private static readonly IList<MediaTypeHeaderValue> XmlMediaTypeHeaderValues = new List<MediaTypeHeaderValue>();
 
         /// <summary>
-        /// Overrides the default formatters in HttpConfiguration.
-        /// </summary>
-        /// <param name="config">The configuration.</param>
-        /// <param name="assembly">The assembly.</param>
-        public static void OverrideFormatters(HttpConfiguration config, Assembly assembly)
-        {
-            config.Formatters.Clear();
-            config.Formatters.AddRange(GetFormatters(assembly));
-        }
-
-        /// <summary>
-        /// Gets the formatters of user API.
+        /// Gets the formatters of the application.
         /// </summary>
         /// <param name="assembly">The assembly.</param>
         /// <returns>
-        /// The list of available formatters of User API.
+        /// The list of available formatters of the application.
         /// </returns>
         public static IEnumerable<MediaTypeFormatter> GetFormatters(Assembly assembly)
         {
-            var modelTypes = GetAllModelTypes(assembly);
+            var modelTypes = GetModelTypes(assembly);
 
             var xmlMediaTypeHeaderValues = new List<MediaTypeHeaderValue>();
 
@@ -140,29 +126,43 @@ namespace TemplateProject.WebAPI.AppStart
             return ToMediaType(typeof(T), version);
         }
 
+        /// <summary>
+        /// Get the media type of the model.
+        /// </summary>
+        /// <param name="modelType">Type of the model.</param>
+        /// <param name="version">The version.</param>
+        /// <returns>The built model media type.</returns>
+        /// <exception cref="System.ArgumentException">Type should end with prefix RequestModel, ResponseModel or Model</exception>
         public static string ToMediaType(Type modelType, string version = "")
         {
             var modelName = modelType.Name;
+            var indexToRemovePrefix = modelName.LastIndexOf("RequestModel", StringComparison.Ordinal);
+            if (indexToRemovePrefix == -1)
+            {
+                indexToRemovePrefix = modelName.LastIndexOf("ResponseModel", StringComparison.Ordinal);
+            }
+            if (indexToRemovePrefix == -1)
+            {
+                indexToRemovePrefix = modelName.LastIndexOf("Model", StringComparison.Ordinal);
+            }
+            if (indexToRemovePrefix == -1)
+            {
+                throw new ArgumentException("Type should end with prefix RequestModel, ResponseModel or Model");
+            }
+
             var modelNameInMediaType = modelName
-                .Remove(modelName.LastIndexOf("Model", StringComparison.Ordinal))
+                .Remove(indexToRemovePrefix)
                 .Aggregate(string.Empty, (s, c) => s + (char.IsUpper(c) && s.Any() ? "-" : string.Empty) + c)
                 .ToLowerInvariant();
+
             var versionPrefix = string.IsNullOrEmpty(version) ? string.Empty : $".v{version}";
 
-            return $"application/vnd.qmc.{modelNameInMediaType}{versionPrefix}";
+            return $"application/quotemycad.{modelNameInMediaType}{versionPrefix}";
         }
 
-        private static List<Type> GetAllModelTypes(Assembly assembly)
+        private static IEnumerable<Type> GetModelTypes(Assembly assembly)
         {
-            var modelTypes = GetModelTypes(assembly);
-            modelTypes.AddRange(GetModelTypes(typeof(MediaTypeFormattersProvider).Assembly));
-            return modelTypes;
+            return assembly.GetExportedTypes().Where(t => t.Name.EndsWith("Model"));
         }
-
-        private static List<Type> GetModelTypes(Assembly assembly)
-        {
-            return assembly.GetExportedTypes().Where(t => t.Name.EndsWith("Model")).ToList();
-        }
-
     }
 }

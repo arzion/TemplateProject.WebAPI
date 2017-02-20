@@ -3,7 +3,7 @@
     /// <summary>
     /// The request model that is used for customer creation and update.
     /// </summary>
-    public class CustomerCreateModel
+    public class CustomerCreateRequestModel
     {
         /// <summary>
         /// Gets or sets the first name of customer to create and update.

@@ -22,7 +22,7 @@ namespace TemplateProject.Tests.Acceptence.WebApi.given_CustomerController
             // POST
             var postResponse = await new HttpRequestBuilder()
                 .WithContent("{\"firstName\": \"" + firstName + "\", \"lastName\": \"" + lastName + "\"}")
-                .WithContentMediaType("application/vnd.qmc.customer-create+json")
+                .WithContentMediaType("application/quotemycad.customer-create+json")
                 .PostAsync("/customer");
 
             // assert
@@ -35,6 +35,8 @@ namespace TemplateProject.Tests.Acceptence.WebApi.given_CustomerController
 
             // assert
             getResponse.StatusCode.Should().Be(HttpStatusCode.OK);
+            getResponse.Content.Headers.ContentType.MediaType.Should().Be("application/quotemycad.customer+json");
+
             var content = await getResponse.Content.ReadAsAsync<dynamic>();
             ((string)content.FirstName).Should().Be(firstName);
             ((string)content.LastName).Should().Be(lastName);

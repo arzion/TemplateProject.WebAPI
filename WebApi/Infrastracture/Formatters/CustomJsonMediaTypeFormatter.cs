@@ -4,13 +4,16 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 
-namespace TemplateProject.WebAPI.AppStart.Formatters
+namespace TemplateProject.WebAPI.Infrastracture.Formatters
 {
     /// <summary>
-    /// Case sensitive JsonMediaTypeFormatter
+    /// Case sensitive JsonMediaTypeFormatter.
     /// </summary>
     public class CustomJsonMediaTypeFormatter : JsonMediaTypeFormatter
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CustomJsonMediaTypeFormatter"/> class.
+        /// </summary>
         public CustomJsonMediaTypeFormatter()
         {
             SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();

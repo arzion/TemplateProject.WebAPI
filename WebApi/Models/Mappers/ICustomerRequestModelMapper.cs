@@ -10,13 +10,13 @@ namespace TemplateProject.WebApi.Models.Mappers
         /// </summary>
         /// <param name="data">The data.</param>
         /// <returns>Mapped customer.</returns>
-        Customer MapToCustomer(CustomerCreateModel data);
+        Customer MapToCustomer(CustomerCreateRequestModel data);
 
         /// <summary>
         /// Merges the request model to customer.
         /// </summary>
         /// <param name="data">The data.</param>
         /// <param name="customer">The customer.</param>
-        void MergeToCustomer(CustomerCreateModel data, Customer customer);
+        void MergeToCustomer(CustomerCreateRequestModel data, Customer customer);
     }
 }
