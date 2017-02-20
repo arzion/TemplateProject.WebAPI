@@ -74,15 +74,21 @@ namespace TemplateProject.Tests.Acceptence.WebApi.Infrastructure
 
         public async Task<HttpResponseMessage> GetAsync(string url)
         {
-            _requestMessage.RequestUri = new Uri("http://localhost:8888/" + RemoveFirstDash(url));
+            _requestMessage.RequestUri = new Uri(url.Contains("http://") ? url : "http://localhost:8888/" + RemoveFirstDash(url));
             _requestMessage.Method = HttpMethod.Get;
 
             var response = await _httpClient.SendAsync(_requestMessage);
 
             if (!response.IsSuccessStatusCode)
             {
-                var content = await response.Content.ReadAsStringAsync();
-                Console.WriteLine(content);
+                if (response.Content == null)
+                {
+                    Console.WriteLine("Content is empty");
+                }
+                else
+                {
+                    Console.WriteLine(await response.Content.ReadAsStringAsync());
+                }
             }
 
             return response;

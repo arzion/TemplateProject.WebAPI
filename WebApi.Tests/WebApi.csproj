@@ -107,6 +107,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="given_CustomerController\when_GettingCustomer.cs" />
     <Compile Include="given_HomeController\when_GettingHomePage.cs" />
     <Compile Include="Infrastructure\HttpClientCustomization.cs" />
     <Compile Include="Infrastructure\HttpRequestBuilder.cs" />

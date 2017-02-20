@@ -28,7 +28,7 @@ namespace TemplateProject.WebApi.Models.Mappers.Impl
         /// <returns>
         /// Mapped customer.
         /// </returns>
-        public Customer MapToCustomer(CustomerRequestModel data)
+        public Customer MapToCustomer(CustomerCreateModel data)
         {
             if (data == null)
             {
@@ -43,7 +43,7 @@ namespace TemplateProject.WebApi.Models.Mappers.Impl
         /// </summary>
         /// <param name="data">The data.</param>
         /// <param name="customer">The customer.</param>
-        public void MergeToCustomer(CustomerRequestModel data, Customer customer)
+        public void MergeToCustomer(CustomerCreateModel data, Customer customer)
         {
             if (data == null)
             {
