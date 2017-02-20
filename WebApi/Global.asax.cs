@@ -1,8 +1,7 @@
 ﻿using System.Web;
 using System.Web.Http;
-using TemplateProject.WebAPI.AppStart;
 
-namespace TemplateProject.WebAPI
+namespace TemplateProject.WebApi
 {
     /// <summary>
     /// The entry point of the application.
@@ -15,9 +14,7 @@ namespace TemplateProject.WebAPI
         /// </summary>
         protected void Application_Start()
         {
-            GlobalConfiguration.Configure(RouteConfiguration.RegisterRoutes);
-            GlobalConfiguration.Configure(FormattersConfiguration.RegisterFormatters);
-            GlobalConfiguration.Configure(DependencyResolverConfiguration.RegisterResolver);
+            GlobalConfiguration.Configure(Bootstrap.Configure);
         }
     }
 }

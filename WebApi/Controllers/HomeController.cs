@@ -1,9 +1,9 @@
 ﻿using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using TemplateProject.WebAPI.Models.Builders;
+using TemplateProject.WebApi.Models.Builders;
 
-namespace TemplateProject.WebAPI.Controllers
+namespace TemplateProject.WebApi.Controllers
 {
     /// <summary>
     /// The main controller of the application.

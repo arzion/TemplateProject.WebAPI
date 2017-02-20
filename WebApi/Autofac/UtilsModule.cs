@@ -1,10 +1,10 @@
 ﻿using System.Net.Http;
 using Autofac;
 using Ploeh.Hyprlinkr;
-using TemplateProject.WebAPI.Infrastracture.Routes;
-using TemplateProject.WebAPI.Utils;
+using TemplateProject.WebApi.Infrastracture.Routes;
+using TemplateProject.WebApi.Utils;
 
-namespace TemplateProject.WebAPI.Autofac
+namespace TemplateProject.WebApi.Autofac
 {
     /// <summary>
     /// Autofac module that register all utils dependencies.

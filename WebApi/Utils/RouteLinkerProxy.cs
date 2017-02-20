@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Ploeh.Hyprlinkr;
 
-namespace TemplateProject.WebAPI.Utils
+namespace TemplateProject.WebApi.Utils
 {
     /// <summary>
     /// <see cref="RouteLinker"/> proxy.

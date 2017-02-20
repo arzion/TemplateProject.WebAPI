@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using TemplateProject.DomainModel;
-using TemplateProject.WebAPI.Models.ResponseModels;
+using TemplateProject.WebApi.Models.ResponseModels;
 
-namespace TemplateProject.WebAPI.Models.Mappers
+namespace TemplateProject.WebApi.Models.Mappers
 {
     /// <summary>
     /// The mapper of <see cref="Customer"/> to contracts.

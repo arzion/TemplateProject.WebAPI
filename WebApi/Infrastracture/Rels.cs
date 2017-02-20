@@ -1,4 +1,4 @@
-﻿namespace TemplateProject.WebAPI.Infrastracture
+﻿namespace TemplateProject.WebApi.Infrastracture
 {
     /// <summary>
     /// The relations of the API application.

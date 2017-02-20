@@ -3,7 +3,7 @@ using System.Web.Http;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 
-namespace TemplateProject.WebAPI.AppStart
+namespace TemplateProject.WebApi.AppStart
 {
     /// <summary>
     /// Configuration of the formatters of the application.

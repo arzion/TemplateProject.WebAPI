@@ -2,7 +2,7 @@
 using Castle.MicroKernel.Context;
 using Castle.MicroKernel.Resolvers;
 
-namespace TemplateProject.WebAPI.Windsor
+namespace TemplateProject.WebApi.Windsor
 {
     /// <summary>
     /// The dependency resolver that propagate the inline dependencies by default.

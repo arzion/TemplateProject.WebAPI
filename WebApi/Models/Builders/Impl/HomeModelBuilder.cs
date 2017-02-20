@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using TemplateProject.WebAPI.Models.LinksFactories;
-using TemplateProject.WebAPI.Models.ResponseModels;
+using TemplateProject.WebApi.Models.LinksFactories;
+using TemplateProject.WebApi.Models.ResponseModels;
 
-namespace TemplateProject.WebAPI.Models.Builders.Impl
+namespace TemplateProject.WebApi.Models.Builders.Impl
 {
     /// <summary>
     /// The builder of the <see cref="HomeResponseModel"/>.

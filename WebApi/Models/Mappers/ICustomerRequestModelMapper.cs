@@ -1,7 +1,7 @@
 ﻿using TemplateProject.DomainModel;
-using TemplateProject.WebAPI.Models.RequestModels;
+using TemplateProject.WebApi.Models.RequestModels;
 
-namespace TemplateProject.WebAPI.Models.Mappers
+namespace TemplateProject.WebApi.Models.Mappers
 {
     public interface ICustomerRequestModelMapper
     {

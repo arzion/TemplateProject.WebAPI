@@ -1,9 +1,9 @@
 ﻿using System;
 using TemplateProject.DomainModel;
 using TemplateProject.DomainModel.Factories;
-using TemplateProject.WebAPI.Models.RequestModels;
+using TemplateProject.WebApi.Models.RequestModels;
 
-namespace TemplateProject.WebAPI.Models.Mappers.Impl
+namespace TemplateProject.WebApi.Models.Mappers.Impl
 {
     /// <summary>
     /// The mapper of the request model to customer.

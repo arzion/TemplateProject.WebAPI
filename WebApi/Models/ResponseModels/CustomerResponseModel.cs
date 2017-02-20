@@ -1,4 +1,4 @@
-﻿namespace TemplateProject.WebAPI.Models.ResponseModels
+﻿namespace TemplateProject.WebApi.Models.ResponseModels
 {
     /// <summary>
     /// The customer model.

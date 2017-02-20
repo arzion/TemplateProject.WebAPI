@@ -5,7 +5,7 @@ using TemplateProject.DataAccess.EntityFramework;
 using TemplateProject.DataAccess.StaticStorage;
 using TemplateProject.DataAccess.UnitOfWork;
 
-namespace TemplateProject.WebAPI.Autofac
+namespace TemplateProject.WebApi.Autofac
 {
     /// <summary>
     /// Autofac module that register all data access dependencies.

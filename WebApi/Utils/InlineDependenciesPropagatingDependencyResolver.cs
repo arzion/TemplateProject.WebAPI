@@ -5,7 +5,7 @@ using System.Web;
 using Castle.MicroKernel.Context;
 using Castle.MicroKernel.Resolvers;
 
-namespace TemplateProject.WebAPI.Utils
+namespace TemplateProject.WebApi.Utils
 {
     public class InlineDependenciesPropagatingDependencyResolver :
     DefaultDependencyResolver

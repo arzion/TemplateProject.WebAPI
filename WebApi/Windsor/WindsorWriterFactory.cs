@@ -2,7 +2,7 @@
 using TemplateProject.DataAccess;
 using TemplateProject.DomainModel;
 
-namespace TemplateProject.WebAPI.Windsor
+namespace TemplateProject.WebApi.Windsor
 {
     /// <summary>
     /// The factory that creates writers through the Windsor container.

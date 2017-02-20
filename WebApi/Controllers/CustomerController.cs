@@ -2,11 +2,11 @@
 using System.Web.Http;
 using TemplateProject.DataAccess;
 using TemplateProject.DomainModel;
-using TemplateProject.WebAPI.Models.Mappers;
-using TemplateProject.WebAPI.Models.RequestModels;
-using TemplateProject.WebAPI.Utils;
+using TemplateProject.WebApi.Models.Mappers;
+using TemplateProject.WebApi.Models.RequestModels;
+using TemplateProject.WebApi.Utils;
 
-namespace TemplateProject.WebAPI.Controllers
+namespace TemplateProject.WebApi.Controllers
 {
     /// <summary>
     /// The controller that works with customer entity.

@@ -3,7 +3,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using Ploeh.Hyprlinkr;
 
-namespace TemplateProject.WebAPI.Infrastracture.Routes
+namespace TemplateProject.WebApi.Infrastracture.Routes
 {
     /// <summary>
     /// The dispatcher of the application routes. Can be used to build strong-typed links.

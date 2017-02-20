@@ -1,9 +1,9 @@
-﻿using TemplateProject.WebAPI.Controllers;
-using TemplateProject.WebAPI.Infrastracture;
-using TemplateProject.WebAPI.Models.ResponseModels;
-using TemplateProject.WebAPI.Utils;
+﻿using TemplateProject.WebApi.Controllers;
+using TemplateProject.WebApi.Infrastracture;
+using TemplateProject.WebApi.Models.ResponseModels;
+using TemplateProject.WebApi.Utils;
 
-namespace TemplateProject.WebAPI.Models.LinksFactories.Impl
+namespace TemplateProject.WebApi.Models.LinksFactories.Impl
 {
     /// <summary>
     /// Builder of the link models for customer resource.

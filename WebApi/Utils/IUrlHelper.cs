@@ -2,7 +2,7 @@
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace TemplateProject.WebAPI.Utils
+namespace TemplateProject.WebApi.Utils
 {
     /// <summary>
     /// Allows to get strongly typed action urls.

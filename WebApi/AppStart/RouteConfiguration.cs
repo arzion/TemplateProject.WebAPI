@@ -1,7 +1,7 @@
 ﻿using System.Web.Http;
-using TemplateProject.WebAPI.Infrastracture.Routes;
+using TemplateProject.WebApi.Infrastracture.Routes;
 
-namespace TemplateProject.WebAPI.AppStart
+namespace TemplateProject.WebApi.AppStart
 {
     /// <summary>
     /// Configuration of the application routes.

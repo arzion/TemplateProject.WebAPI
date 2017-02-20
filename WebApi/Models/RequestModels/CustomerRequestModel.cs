@@ -1,4 +1,4 @@
-﻿namespace TemplateProject.WebAPI.Models.RequestModels
+﻿namespace TemplateProject.WebApi.Models.RequestModels
 {
     /// <summary>
     /// The request model that is used for customer creation and update.

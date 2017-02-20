@@ -3,7 +3,7 @@ using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 
-namespace TemplateProject.WebAPI.Windsor
+namespace TemplateProject.WebApi.Windsor
 {
     /// <summary>
     /// Autofac module that register all model builders in assembly.

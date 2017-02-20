@@ -2,10 +2,10 @@
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using Ploeh.Hyprlinkr;
-using TemplateProject.WebAPI.Infrastracture.Routes;
-using TemplateProject.WebAPI.Utils;
+using TemplateProject.WebApi.Infrastracture.Routes;
+using TemplateProject.WebApi.Utils;
 
-namespace TemplateProject.WebAPI.Windsor
+namespace TemplateProject.WebApi.Windsor
 {
     /// <summary>
     /// Autofac module that register all utils dependencies.

@@ -2,7 +2,7 @@
 using Autofac;
 using Module = Autofac.Module;
 
-namespace TemplateProject.WebAPI.Autofac
+namespace TemplateProject.WebApi.Autofac
 {
     /// <summary>
     /// Autofac module that register all model builders in assembly.

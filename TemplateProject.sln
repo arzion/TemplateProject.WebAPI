@@ -13,6 +13,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess.StaticStorage", "DataAccess.StaticStorage\DataAccess.StaticStorage.csproj", "{EBECE5B9-385A-44E4-9062-07804C9CD0BD}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{C81B61D1-007F-4D24-9E38-52C6D97E35C4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AcceptenceTests", "AcceptenceTests", "{FC4164A1-A2EC-459D-89A6-189E3821789C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi.Tests\WebApi.csproj", "{1224A86C-7F33-4017-967E-7C894072006C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,8 +45,16 @@ Global
 		{EBECE5B9-385A-44E4-9062-07804C9CD0BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EBECE5B9-385A-44E4-9062-07804C9CD0BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EBECE5B9-385A-44E4-9062-07804C9CD0BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1224A86C-7F33-4017-967E-7C894072006C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1224A86C-7F33-4017-967E-7C894072006C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1224A86C-7F33-4017-967E-7C894072006C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1224A86C-7F33-4017-967E-7C894072006C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FC4164A1-A2EC-459D-89A6-189E3821789C} = {C81B61D1-007F-4D24-9E38-52C6D97E35C4}
+		{1224A86C-7F33-4017-967E-7C894072006C} = {FC4164A1-A2EC-459D-89A6-189E3821789C}
 	EndGlobalSection
 EndGlobal

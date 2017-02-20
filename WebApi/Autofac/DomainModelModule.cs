@@ -3,7 +3,7 @@ using Autofac;
 using TemplateProject.DomainModel;
 using Module = Autofac.Module;
 
-namespace TemplateProject.WebAPI.Autofac
+namespace TemplateProject.WebApi.Autofac
 {
     /// <summary>
     /// Autofac module that register all domain module services dependencies.

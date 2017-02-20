@@ -2,7 +2,7 @@
 using System.Web.Http;
 using System.Web.Http.Routing;
 
-namespace TemplateProject.WebAPI.Infrastracture.Routes
+namespace TemplateProject.WebApi.Infrastracture.Routes
 {
     /// <summary>
     /// The extentions of the <see cref="HttpRouteCollection"/>.

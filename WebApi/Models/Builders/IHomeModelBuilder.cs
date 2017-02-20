@@ -1,6 +1,6 @@
-﻿using TemplateProject.WebAPI.Models.ResponseModels;
+﻿using TemplateProject.WebApi.Models.ResponseModels;
 
-namespace TemplateProject.WebAPI.Models.Builders
+namespace TemplateProject.WebApi.Models.Builders
 {
     /// <summary>
     /// The builder of the <see cref="HomeResponseModel"/>.

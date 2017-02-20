@@ -1,6 +1,6 @@
-﻿using TemplateProject.WebAPI.Models.ResponseModels;
+﻿using TemplateProject.WebApi.Models.ResponseModels;
 
-namespace TemplateProject.WebAPI.Models.LinksFactories
+namespace TemplateProject.WebApi.Models.LinksFactories
 {
     /// <summary>
     /// Builder of the link models for customer resource.

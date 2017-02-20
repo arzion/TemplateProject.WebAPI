@@ -2,7 +2,7 @@
 using TemplateProject.DataAccess;
 using TemplateProject.DomainModel;
 
-namespace TemplateProject.WebAPI.Autofac
+namespace TemplateProject.WebApi.Autofac
 {
     /// <summary>
     /// The factory that creates writers through the Autofac container.

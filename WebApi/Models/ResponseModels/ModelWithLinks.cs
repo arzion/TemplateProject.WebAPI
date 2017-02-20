@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace TemplateProject.WebAPI.Models.ResponseModels
+namespace TemplateProject.WebApi.Models.ResponseModels
 {
     /// <summary>
     /// The base class for model that contains links.

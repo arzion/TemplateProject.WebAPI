@@ -9,10 +9,10 @@ using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
 using Castle.Windsor.Proxy;
-using TemplateProject.WebAPI.Controllers;
-using TemplateProject.WebAPI.Utils;
+using TemplateProject.WebApi.Controllers;
+using TemplateProject.WebApi.Utils;
 
-namespace TemplateProject.WebAPI.AppStart
+namespace TemplateProject.WebApi.AppStart
 {
     /// <summary>
     /// Registration of the dependency resolver of the ASP.NET Web.API application.
