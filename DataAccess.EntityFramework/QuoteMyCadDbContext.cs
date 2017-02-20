@@ -18,10 +18,10 @@ namespace TemplateProject.DataAccess.EntityFramework
         static TemplateProjectContext()
         {
             // To align with current data base schema
-            Database.SetInitializer<TemplateProjectContext>(null);
+            // Database.SetInitializer<TemplateProjectContext>(null);
 
             // To generate base from a models:
-            // Database.SetInitializer(new CreateDatabaseIfNotExists<TemplateProjectContext>());
+            Database.SetInitializer(new CreateDatabaseIfNotExists<TemplateProjectContext>());
         }
 
         /// <summary>

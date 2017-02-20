@@ -53,7 +53,8 @@ namespace TemplateProject.Tests.Acceptence.WebApi.Infrastructure
             _requestMessage.RequestUri = BuildUri(url);
             _requestMessage.Method = HttpMethod.Post;
 
-            return await _httpClient.SendAsync(_requestMessage);
+            var response = await _httpClient.SendAsync(_requestMessage);
+            return await ProcessResponse(response);
         }
 
         public async Task<HttpResponseMessage> PutAsync(string url)
@@ -61,7 +62,8 @@ namespace TemplateProject.Tests.Acceptence.WebApi.Infrastructure
             _requestMessage.RequestUri = BuildUri(url);
             _requestMessage.Method = HttpMethod.Put;
 
-            return await _httpClient.SendAsync(_requestMessage);
+            var response = await _httpClient.SendAsync(_requestMessage);
+            return await ProcessResponse(response);
         }
 
         public async Task<HttpResponseMessage> DeleteAsync(string url)
@@ -69,7 +71,8 @@ namespace TemplateProject.Tests.Acceptence.WebApi.Infrastructure
             _requestMessage.RequestUri = BuildUri(url);
             _requestMessage.Method = HttpMethod.Delete;
 
-            return await _httpClient.SendAsync(_requestMessage);
+            var response = await _httpClient.SendAsync(_requestMessage);
+            return await ProcessResponse(response);
         }
 
         public async Task<HttpResponseMessage> GetAsync(string url)
@@ -78,7 +81,11 @@ namespace TemplateProject.Tests.Acceptence.WebApi.Infrastructure
             _requestMessage.Method = HttpMethod.Get;
 
             var response = await _httpClient.SendAsync(_requestMessage);
+            return await ProcessResponse(response);
+        }
 
+        private static async Task<HttpResponseMessage> ProcessResponse(HttpResponseMessage response)
+        {
             if (!response.IsSuccessStatusCode)
             {
                 if (response.Content == null)

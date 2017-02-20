@@ -21,7 +21,7 @@ namespace TemplateProject.DataAccess.EntityFramework
             _context = provider.GetDbContext();
         }
 
-        private IDbSet<TEntity> Entities => _context.Set<TEntity>();
+        private DbSet Entities => _context.Set(typeof(TEntity));
 
         /// <summary>
         /// Adds the specified entity.
