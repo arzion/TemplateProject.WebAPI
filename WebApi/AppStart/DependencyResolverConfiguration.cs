@@ -1,16 +1,8 @@
-﻿using System.Configuration;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Web.Http;
-using System.Web.Http.Dispatcher;
 using Autofac;
 using Autofac.Integration.WebApi;
-using Castle.MicroKernel;
-using Castle.MicroKernel.Registration;
-using Castle.Windsor;
-using Castle.Windsor.Installer;
-using Castle.Windsor.Proxy;
 using TemplateProject.WebApi.Controllers;
-using TemplateProject.WebApi.Utils;
 
 namespace TemplateProject.WebApi.AppStart
 {
@@ -25,24 +17,7 @@ namespace TemplateProject.WebApi.AppStart
         /// <param name="config">The configuration.</param>
         public static void RegisterResolver(HttpConfiguration config)
         {
-            var ioc = ConfigurationManager.AppSettings["iocContainer"];
-            switch (ioc)
-            {
-                case "castle":
-                {
-                    ConfigureCastleWindsorDependencyResolver(config);
-                    break;
-                }
-                case "autofac":
-                {
-                    ConfigureAutofacDependencyResolver(config);
-                    break;
-                }
-                default:
-                {
-                    throw new ConfigurationErrorsException("iocContainer setting is incorrect");
-                }
-            }
+            ConfigureAutofacDependencyResolver(config);
         }
 
         private static void ConfigureAutofacDependencyResolver(HttpConfiguration config)
@@ -55,29 +30,6 @@ namespace TemplateProject.WebApi.AppStart
             var container = containerBuilder.Build();
 
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
-        }
-
-        private static void ConfigureCastleWindsorDependencyResolver(HttpConfiguration config)
-        {
-            var container =
-                new WindsorContainer(
-                    new DefaultKernel(
-                        new InlineDependenciesPropagatingDependencyResolver(),
-                        new DefaultProxyFactory()),
-                    new DefaultComponentInstaller());
-
-            container.Install(FromAssembly.This());
-
-            container.Register(
-                Classes
-                    .FromThisAssembly()
-                    .BasedOn<ApiController>()
-                    .Configure(c => c.PropertiesIgnore(it => true))
-                    .LifestylePerWebRequest());
-
-            config.Services.Replace(
-                typeof(IHttpControllerActivator),
-                new WindsorCompositionRoot(container));
         }
     }
 }
