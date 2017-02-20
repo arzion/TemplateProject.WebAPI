@@ -59,7 +59,7 @@ namespace TemplateProject.WebApi.Models.LinksFactories.Impl
             {
                 var keyword = int.MaxValue.ToString();
 
-                var template = _urlHelper.GetUri<CustomerController>(c => c.GetByName(keyword)).AbsoluteUri;
+                var template = _urlHelper.GetUri<CustomersController>(c => c.GetByName(keyword)).AbsoluteUri;
                 template = template
                     .Replace(keyword, "{keyword}");
 

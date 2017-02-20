@@ -36,7 +36,7 @@ namespace TemplateProject.Tests.Acceptence.WebApi.given_CustomerController
             var postResponse = await new HttpRequestBuilder()
                 .WithContent("{\"firstName\": \"" + firstName + "\", \"lastName\": \"" + lastName + "\"}")
                 .WithContentMediaType("application/quotemycad.customer-create+json")
-                .PostAsync("/customer");
+                .PostAsync("/customers");
 
             // assert
             postResponse.StatusCode.Should().Be(HttpStatusCode.Created);

@@ -18,9 +18,11 @@ namespace TemplateProject.WebApi.AppStart
 
             // Customer
             config.Routes.MapRouteWithName(
-                "CustomerSearch", "customer/search/{keyword}", new { controller = "Customer", Action = "GetByName" });
+                "CustomerSearch", "customers/search/{keyword}", new { controller = "Customers", Action = "GetByName" });
             config.Routes.MapRouteWithName(
-                "Customer", "customer/{id}", new { controller = "Customer", id = RouteParameter.Optional });
+                "Customers", "customers", new { controller = "Customers" });
+            config.Routes.MapRouteWithName(
+                "Customer", "customer/{id}", new { controller = "Customer" });
         }
     }
 }

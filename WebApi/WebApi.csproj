@@ -153,6 +153,7 @@
   <ItemGroup>
     <Compile Include="AppStart\DependencyResolverConfiguration.cs" />
     <Compile Include="AppStart\FormatterConfiguration.cs" />
+    <Compile Include="Controllers\CustomersController.cs" />
     <Compile Include="Infrastracture\Formatters\CustomJsonMediaTypeFormatter.cs" />
     <Compile Include="Infrastracture\Formatters\TypedJsonMediaTypeFormatter.cs" />
     <Compile Include="Infrastracture\Formatters\XmlMediaTypeFormatter.cs" />

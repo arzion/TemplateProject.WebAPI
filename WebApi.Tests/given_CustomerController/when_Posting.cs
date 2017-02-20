@@ -23,7 +23,7 @@ namespace TemplateProject.Tests.Acceptence.WebApi.given_CustomerController
             var postResponse = await new HttpRequestBuilder()
                 .WithContent("{\"firstName\": \"" + firstName + "\", \"lastName\": \"" + lastName + "\"}")
                 .WithContentMediaType("application/quotemycad.customer-create+json")
-                .PostAsync("/customer");
+                .PostAsync("/customers");
 
             // assert
             postResponse.StatusCode.Should().Be(HttpStatusCode.Created);
@@ -41,7 +41,7 @@ namespace TemplateProject.Tests.Acceptence.WebApi.given_CustomerController
             var postResponse = await new HttpRequestBuilder()
                 .WithContent("{\"firstName\": \"" + firstName + "\", \"lastName\": \"" + lastName + "\"}")
                 .WithContentMediaType("application/quotemycad.customer-create+json")
-                .PostAsync("/customer");
+                .PostAsync("/customers");
 
             // assert
             postResponse.StatusCode.Should().Be(HttpStatusCode.Created);
@@ -71,7 +71,7 @@ namespace TemplateProject.Tests.Acceptence.WebApi.given_CustomerController
             var postResponse = await new HttpRequestBuilder()
                 .WithContent("{\"firstName\": \"" + firstName + "\", \"lastName\": \"" + lastName + "\"}")
                 .WithContentMediaType("application/quotemycad.fake-create+json")
-                .PostAsync("/customer");
+                .PostAsync("/customers");
 
             // assert
             postResponse.StatusCode.Should().Be(HttpStatusCode.UnsupportedMediaType);
@@ -88,7 +88,7 @@ namespace TemplateProject.Tests.Acceptence.WebApi.given_CustomerController
             // POST
             var postResponse = await new HttpRequestBuilder()
                 .WithContent("{\"firstName\": \"" + firstName + "\", \"lastName\": \"" + lastName + "\"}")
-                .PostAsync("/customer");
+                .PostAsync("/customers");
 
             // assert
             postResponse.StatusCode.Should().Be(HttpStatusCode.UnsupportedMediaType);
