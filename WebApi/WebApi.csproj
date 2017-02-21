@@ -179,6 +179,7 @@
     <Compile Include="Models\Mappers\ICustomerRequestModelMapper.cs" />
     <Compile Include="Models\Mappers\Impl\CustomerRequestModelMapper.cs" />
     <Compile Include="Models\RequestModels\CustomerCreateRequestModel.cs" />
+    <Compile Include="Models\ResponseModels\CustomerCollectionResponseModel.cs" />
     <Compile Include="Models\ResponseModels\CustomerResponseModel.cs" />
     <Compile Include="Models\ResponseModels\HomeResponseModel.cs" />
     <Compile Include="Models\ResponseModels\LinkModel.cs" />

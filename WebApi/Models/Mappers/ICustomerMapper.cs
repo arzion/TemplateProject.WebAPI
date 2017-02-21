@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using TemplateProject.DomainModel;
 using TemplateProject.WebApi.Models.ResponseModels;
+using TemplateProject.WebAPI.Models.ResponseModels;
 
 namespace TemplateProject.WebApi.Models.Mappers
 {
@@ -21,6 +22,6 @@ namespace TemplateProject.WebApi.Models.Mappers
         /// </summary>
         /// <param name="customers">The customers to mapped.</param>
         /// <returns>Mapped collection of customer model.</returns>
-        IEnumerable<CustomerResponseModel> MapToResponseModel(IEnumerable<Customer> customers);
+        CustomerCollectionResponseModel MapToResponseModel(IEnumerable<Customer> customers);
     }
 }

@@ -3,6 +3,7 @@ using System.Linq;
 using TemplateProject.DomainModel;
 using TemplateProject.WebApi.Models.LinksFactories;
 using TemplateProject.WebApi.Models.ResponseModels;
+using TemplateProject.WebAPI.Models.ResponseModels;
 
 namespace TemplateProject.WebApi.Models.Mappers.Impl
 {
@@ -44,9 +45,12 @@ namespace TemplateProject.WebApi.Models.Mappers.Impl
         /// </summary>
         /// <param name="customers">The customers to mapped.</param>
         /// <returns>Mapped collection of customer model.</returns>
-        public IEnumerable<CustomerResponseModel> MapToResponseModel(IEnumerable<Customer> customers)
+        public CustomerCollectionResponseModel MapToResponseModel(IEnumerable<Customer> customers)
         {
-            return customers.Select(MapToResponseModel);
+            return new CustomerCollectionResponseModel
+            {
+                Customers = customers.Select(MapToResponseModel).ToList()
+            };
         }
     }
 }
